@@ -1,0 +1,15 @@
+name: "Jackson Kotlin"
+description: >
+  Auto-registers Kotlin data classes, enums, and Jackson-annotated classes for native-image
+  reflection so the Jackson Kotlin module works in Quarkus native binaries without
+  hand-curated @RegisterForReflection lists.
+metadata:
+  keywords:
+    - jackson
+    - kotlin
+    - reflection
+    - native
+    - serialization
+  categories:
+    - serialization
+  status: experimental
