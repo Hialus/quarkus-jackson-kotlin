@@ -48,9 +48,19 @@ A class qualifies if it carries `@kotlin.Metadata` and matches one of:
 - any `com.fasterxml.jackson.annotation.*` annotation, on the class or a member
 - `@kotlinx.serialization.Serializable`
 
-It skips synthetic and inner/nested classes (the outer covers them), kotlinx.serialization's
-`$$serializer` helpers, and anything already annotated `@RegisterForReflection` or
-`@jakarta.ws.rs.Path` — those are Quarkus' job.
+Nested classes count. kotlin-reflect finds a nested class through the classes around it,
+looked up by name, so the extension also makes those reachable by name. Without that,
+Jackson sees no properties on something like `Request.Response` and quietly writes `{}`.
+
+It skips synthetic, local and anonymous classes, kotlinx.serialization's `$$serializer`
+helpers, and anything already annotated `@RegisterForReflection` or `@jakarta.ws.rs.Path`
+— those are Quarkus' job.
+
+It also registers the Kotlin standard library collections that show up inside serialized
+values: the `buildList`/`buildMap`/`buildSet` builders, `ArrayDeque`, reversed and
+sub-list views, `Pair`, `Triple` and `IndexedValue`. Jackson's Kotlin module treats them
+like any other Kotlin class, and without a registration a native image fails with
+`Unresolved class: kotlin.collections.builders.ListBuilder`.
 
 Scope is your own modules plus whatever you've added under
 `quarkus.index-dependency.<name>` in `application.properties`. External Quarkus

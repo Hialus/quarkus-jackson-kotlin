@@ -13,4 +13,11 @@ dependencies {
     api("io.quarkus:quarkus-arc-deployment")
 
     kapt("io.quarkus:quarkus-extension-processor:$quarkusVersion")
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
