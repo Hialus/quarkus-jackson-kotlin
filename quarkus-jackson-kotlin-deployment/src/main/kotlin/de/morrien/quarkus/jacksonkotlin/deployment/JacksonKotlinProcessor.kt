@@ -37,7 +37,7 @@ class JacksonKotlinProcessor {
         archives: ApplicationArchivesBuildItem,
         producer: BuildProducer<ReflectiveClassBuildItem>,
     ) {
-        val candidates = archives.allApplicationArchives.asSequence()
+        val candidates = archives.allArchives.asSequence()
             .flatMap { it.index.knownClasses.asSequence() }
             .let(::selectCandidates)
         if (candidates.isEmpty()) return

@@ -3,10 +3,10 @@ plugins {
     kotlin("kapt")
 }
 
-val quarkusVersion: String by rootProject.extra
+val quarkusVersion = rootProject.extra["quarkusVersion"] as String
 
 dependencies {
-    api(platform("io.quarkus.platform:quarkus-bom:$quarkusVersion"))
+    api(platform("io.quarkus:quarkus-bom:$quarkusVersion"))
 
     api(project(":quarkus-jackson-kotlin"))
     api("io.quarkus:quarkus-core-deployment")

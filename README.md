@@ -31,6 +31,8 @@ dependencies {
 }
 ```
 
+From 0.3.0 on, the extension supports Quarkus 4. For Quarkus 3 use`v0.2.0`.
+
 JitPack builds the repo on demand the first time someone asks for a tag, so the initial
 resolve can take a minute. After that it's cached.
 

@@ -4,13 +4,13 @@ plugins {
     kotlin("jvm")
 }
 
-val quarkusVersion: String by rootProject.extra
+val quarkusVersion = rootProject.extra["quarkusVersion"] as String
 
 quarkusExtension {
     setDisableValidation(true)
 }
 
 dependencies {
-    api(platform("io.quarkus.platform:quarkus-bom:$quarkusVersion"))
+    api(platform("io.quarkus:quarkus-bom:$quarkusVersion"))
     api("io.quarkus:quarkus-core")
 }
